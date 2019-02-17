@@ -28,17 +28,17 @@ class Product(DescriptionMixin):
     article = models.CharField(max_length=30, unique=True, db_index=True)
     name = models.CharField(max_length=120)
     price = models.FloatField()
-    sell_price = models.FloatField()
+    amount = models.IntegerField(default=0)
     image = models.ImageField(upload_to='app/static/images')
     category = models.ForeignKey('Category', db_index=True)
     tags = models.ManyToManyField(Tag, related_name='products')
     reviews = models.ManyToManyField(Review, related_name='product')
-    rate = models.FloatField()
+    rate = models.FloatField(default=0.0)
     add_datetime = models.DateTimeField(default=datetime.now)
-    show_datetime = models.DateTimeField()
-    is_new = models.BooleanField()
-    is_best_price = models.BooleanField()
-    is_recommend = models.BooleanField()
+    show_datetime = models.DateTimeField(default=datetime.now)
+    is_new = models.BooleanField(default=False)
+    is_best_price = models.BooleanField(default=False)
+    is_recommend = models.BooleanField(default=False)
 
 
 class Pages(models.Model):
