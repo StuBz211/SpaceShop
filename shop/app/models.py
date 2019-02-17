@@ -29,7 +29,7 @@ class Product(DescriptionMixin):
     name = models.CharField(max_length=120)
     price = models.FloatField()
     sell_price = models.FloatField()
-    image = models.ImageField(upload_to='web_site/static/images')
+    image = models.ImageField(upload_to='app/static/images')
     category = models.ForeignKey('Category', db_index=True)
     tags = models.ManyToManyField(Tag, related_name='products')
     reviews = models.ManyToManyField(Review, related_name='product')

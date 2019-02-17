@@ -4,7 +4,7 @@ from . import models
 
 
 class ProductListView(generic.ListView):
-    template_name = 'templates/web_site/list_view.html'
+    template_name = 'templates/app/list_view.html'
 
     model = models.Product
 
@@ -14,7 +14,7 @@ class ProductListView(generic.ListView):
 
 
 class ProductDetailView(generic.DetailView):
-    template_name = 'templates/web_site/detail_view.html'
+    template_name = 'templates/app/detail_view.html'
     model = models.Product
 
     def get_queryset(self, **kwargs):
