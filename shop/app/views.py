@@ -4,19 +4,20 @@ from . import models
 
 
 class ProductListView(generic.ListView):
-    template_name = 'templates/app/list_view.html'
+    template_name = 'product_list.html'
 
     model = models.Product
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(ProductListView, self).get_context_data(**kwargs)
         return context
 
 
 class ProductDetailView(generic.DetailView):
-    template_name = 'templates/app/detail_view.html'
+    template_name = 'detail_view.html'
+
     model = models.Product
 
-    def get_queryset(self, **kwargs):
-        queryset = super().get_queryset()
+    def get_context_data(self, **kwargs):
+        queryset = super(ProductDetailView, self).get_context_data(**kwargs)
         return queryset
