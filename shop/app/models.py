@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
+from django.db import models
 
 from .mixins import TitleMixin, DescriptionMixin
 
@@ -20,7 +20,7 @@ class Review(TitleMixin, DescriptionMixin):
     """product review model"""
     rate = models.FloatField()
     date = models.DateTimeField(default=datetime.now)
-    user = models.ForeignKey('User', related_name='reviewed')
+    user = models.ForeignKey('User', related_name='reviewed', on_delete=models.CASCADE)
 
 
 class Product(DescriptionMixin):
@@ -30,7 +30,7 @@ class Product(DescriptionMixin):
     price = models.FloatField()
     amount = models.IntegerField(default=0)
     image = models.ImageField(upload_to='app/static/images')
-    category = models.ForeignKey('Category', db_index=True)
+    category = models.ForeignKey('Category', db_index=True, on_delete=models.SET(None))
     tags = models.ManyToManyField(Tag, related_name='products')
     reviews = models.ManyToManyField(Review, related_name='product')
     rate = models.FloatField(default=0.0)
@@ -44,7 +44,7 @@ class Product(DescriptionMixin):
 class Pages(models.Model):
     """visited page model"""
     url = models.URLField()
-    product = models.ForeignKey('Product')
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
 
 
 class OrderStatus(TitleMixin):
@@ -59,7 +59,7 @@ class Order(models.Model):
     total_sum = models.FloatField()
     address = models.CharField(max_length=100)
     note = models.TextField()
-    status = models.ForeignKey('OrderStatus')
+    status = models.ForeignKey('OrderStatus', on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
     order_datetime = models.DateTimeField(default=datetime.now)
 

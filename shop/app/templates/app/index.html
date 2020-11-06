@@ -1,0 +1,21 @@
+{% extends 'app/base.html' %}
+
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<h1>Главная страница</h1>
+{% if product %}
+{% for p in product %}
+<div class="alert alert-warning mt-2">
+    <p><strong>{{p.name}}</strong></p>
+</div>
+{% endfor %}
+{% else %}
+<div class="alert">
+    <p>Нет записей!</p>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,22 +1,19 @@
-from django.views import generic
+from django.shortcuts import render
 
-from . import models
-
-
-class ProductListView(generic.ListView):
-    template_name = 'templates/app/list_view.html'
-
-    model = models.Product
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+from .models import Product
 
 
-class ProductDetailView(generic.DetailView):
-    template_name = 'templates/app/detail_view.html'
-    model = models.Product
+def product_list_view(request):
+    product = Product.objects.order_by('name')
+    title = 'Магазин мифических вещей'
+    return render(request, 'app/list_view.html', {'title': title, 'product': product})
 
-    def get_queryset(self, **kwargs):
-        queryset = super().get_queryset()
-        return queryset
+
+def product_detail_view(request):
+    product = Product.objects.order_by('name')
+    return render(request, 'app/list_view.html', {'title': 'Детальное описание вещей', 'product': product})
+
+
+def index(request):
+    product = Product.objects.order_by('name')
+    return render(request, 'app/index.html', {'title': 'SpaceShop', 'product': product})

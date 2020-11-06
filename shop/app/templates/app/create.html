@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Создать задачу
+{% endblock %}
+{{ csrf_token }}
+{% block content %}
+<h1>Создать задачу</h1>
+
+<form method="POST" class="mt-20">
+    {% csrf_token %}
+    {{ form.title }}<br>
+    {{ form.task }}<br>
+    <button type="submit" class="btn btn-success">Добавить</button>
+    <span>{{error}}</span>
+</form>
+
+
+{% endblock %}
